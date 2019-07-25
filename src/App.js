@@ -1,7 +1,7 @@
 import React from 'react';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
-import { ALL_SEGMENTS } from './utils/requests';
+import { ALL_SEGMENTS } from './dataSource/requests';
 
 import Routes from './routes/Routes';
 
