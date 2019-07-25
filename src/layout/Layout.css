@@ -1,0 +1,31 @@
+.logo {
+  width: 120px;
+  height: 31px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px 24px 16px 0;
+  float: left;
+  color: antiquewhite;
+  text-align: center;
+}
+
+.layout {
+  min-height: 100vh;
+}
+
+.menu {
+  line-height: 64px;
+}
+
+.content {
+  padding: 40px;
+}
+
+.content-children {
+  background: #fff;
+  padding: 24px;
+  min-height: 280px;
+}
+
+.footer {
+  text-align: center;
+}
