@@ -22,8 +22,8 @@ const Routes = () => (
       <Route
         exact
         path="/startups"
-        render={() => (
-          <Layout>
+        render={props => (
+          <Layout {...props}>
             <Startups />
           </Layout>
         )}
@@ -31,8 +31,8 @@ const Routes = () => (
       <Route
         exact
         path="/results"
-        render={() => (
-          <Layout>
+        render={props => (
+          <Layout {...props}>
             <Results />
           </Layout>
         )}
