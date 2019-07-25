@@ -12,7 +12,7 @@ const Routes = () => (
     <Switch>
       <Route
         exact
-        path="/home"
+        path="/"
         render={props => (
           <Layout {...props}>
             <Home />

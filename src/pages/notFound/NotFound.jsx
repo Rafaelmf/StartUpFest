@@ -8,7 +8,7 @@ const Home = () => (
     title="404"
     subTitle="Desculpe, a pagina que você está tentando acessar não está disponível."
     extra={(
-      <Link to="/home">
+      <Link to="/">
         <Button type="primary">Voltar para Home</Button>
       </Link>
 )}

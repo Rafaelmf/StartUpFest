@@ -14,7 +14,7 @@ class Layout extends PureComponent {
           <div className="logo" />
           <Menu className="menu" theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
             <Menu.Item key="1">
-              <Link to="/home">Home</Link>
+              <Link to="/">Home</Link>
             </Menu.Item>
             <Menu.Item key="2">
               <Link to="/startups">Startups</Link>
