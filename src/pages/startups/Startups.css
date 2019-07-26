@@ -25,6 +25,9 @@
   grid-template-rows: 1fr;
   border: 2px solid gray;
 }
+.span-filter {
+  margin-right: 10px;
+}
 
 img {
   width: 100%;
