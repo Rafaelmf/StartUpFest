@@ -1,0 +1,34 @@
+.startup-container {
+  margin: 50px;
+}
+.search-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 40px;
+}
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-auto-rows: 400px;
+  grid-gap: 30px;
+
+  min-height: 100%;
+  margin-top: 40px;
+}
+
+.spin-container {
+  text-align: center;
+}
+
+.card {
+  display: grid;
+  grid-template-rows: 1fr;
+  border: 2px solid gray;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  border-bottom: 2px solid gray;
+  padding: 20px;
+}
