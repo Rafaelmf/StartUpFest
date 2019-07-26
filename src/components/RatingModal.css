@@ -9,6 +9,7 @@
 }
 
 .modal-img {
+  box-shadow: 3px 3px 8px 0px rgba(0, 0, 0, 0.75);
   height: 100%;
   width: 100%;
 }

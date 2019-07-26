@@ -4,7 +4,7 @@ import { withApollo } from 'react-apollo';
 import { ALL_SEGMENTS } from '../../dataSource/requests';
 import './Startups.css';
 import noLogo from '../../img/no-logo.jpg'; // Tell Webpack this JS file uses this image
-import RatingCard from '../../components/RatingCard';
+import RatingModal from '../../components/RatingModal';
 
 const { Meta } = Card;
 const { Search } = Input;
@@ -108,7 +108,7 @@ class Home extends PureComponent {
 
         <div className="spin-container">
           {isLoading ? (
-            <Spin tip="Carregando..." />
+            <Spin />
           ) : (
             <div className="card-container">
               {displaySegments.map(segment =>
@@ -144,7 +144,7 @@ class Home extends PureComponent {
             </div>
           )}
         </div>
-        <RatingCard
+        <RatingModal
           modalVisible={modalVisible}
           selectedSegment={selectedSegment}
           selectedStartup={selectedStartup}
