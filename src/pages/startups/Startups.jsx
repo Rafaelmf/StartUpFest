@@ -3,7 +3,8 @@ import { Card, Input, Checkbox, Divider, Spin } from 'antd';
 import { withApollo } from 'react-apollo';
 import { ALL_SEGMENTS } from '../../dataSource/requests';
 import './Startups.css';
-import noLogo from './no-logo.jpg'; // Tell Webpack this JS file uses this image
+import noLogo from '../../img/no-logo.jpg'; // Tell Webpack this JS file uses this image
+import RatingCard from '../../components/RatingCard';
 
 const { Meta } = Card;
 const { Search } = Input;
@@ -12,6 +13,7 @@ class Home extends PureComponent {
     super(props);
     this.state = {
       isLoading: true,
+      modalVisible: false,
     };
   }
 
@@ -73,8 +75,23 @@ class Home extends PureComponent {
     }
   };
 
+  handleCancelModal = () => {
+    this.setState({ modalVisible: false });
+  };
+
+  handleOkModal = () => {
+    //Submit rating data here
+  };
+
   render() {
-    const { isLoading, displaySegments, segmentNames } = this.state;
+    const {
+      isLoading,
+      displaySegments,
+      segmentNames,
+      selectedSegment,
+      selectedStartup,
+      modalVisible,
+    } = this.state;
     return (
       <div className="startup-container">
         <div className="search-header">
@@ -99,12 +116,20 @@ class Home extends PureComponent {
               {displaySegments.map(segment =>
                 segment.Startups.map(startup => (
                   <Card
+                    onClick={() =>
+                      this.setState({
+                        selectedSegment: segment,
+                        selectedStartup: startup,
+                        modalVisible: true,
+                      })
+                    }
                     key={segment.id}
                     className="card"
                     hoverable
                     style={{ width: 300 }}
                     cover={
                       <img
+                        className="card-image"
                         onError={e => {
                           e.target.onError = null;
                           e.target.src = noLogo;
@@ -121,6 +146,13 @@ class Home extends PureComponent {
             </div>
           )}
         </div>
+        <RatingCard
+          modalVisible={modalVisible}
+          selectedSegment={selectedSegment}
+          selectedStartup={selectedStartup}
+          onOk={this.handleOkModal}
+          onCancel={this.handleCancelModal}
+        />
       </div>
     );
   }
