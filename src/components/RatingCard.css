@@ -1,0 +1,20 @@
+.modal-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 20px;
+}
+
+.modal-description {
+  grid-column: 1 / span 2;
+}
+
+.modal-img {
+  height: 100%;
+  width: 100%;
+}
+
+.rating-p {
+  margin-top: 15px;
+  display: grid;
+  grid-template-columns: 20px 5fr;
+}
