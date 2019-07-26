@@ -3,8 +3,7 @@
 }
 .search-header {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 40px;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 .card-container {
   display: grid;
@@ -26,6 +25,7 @@
   border: 2px solid gray;
 }
 .span-filter {
+  text-align: right;
   margin-right: 10px;
 }
 

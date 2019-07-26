@@ -100,10 +100,8 @@ class Home extends PureComponent {
             onSearch={value => this.onSearch(value)}
             enterButton
           />
-          <div>
-            <span className="span-filter">Filtre por segmento:</span>
-            <Checkbox.Group options={segmentNames} onChange={this.onChangeCheckbox} />
-          </div>
+          <h1 className="span-filter">Filtre por segmento:</h1>
+          <Checkbox.Group options={segmentNames} onChange={this.onChangeCheckbox} />
         </div>
 
         <Divider />

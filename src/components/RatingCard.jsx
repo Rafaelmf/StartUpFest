@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
-import { Modal, Divider, Rate } from 'antd';
+import {
+  Modal, Divider, Rate, Tooltip, Icon,
+} from 'antd';
 import PropTypes from 'prop-types';
 import noLogo from '../img/no-logo.jpg';
 import './RatingCard.css';
@@ -34,12 +36,27 @@ export default class RatingCard extends PureComponent {
                 />
               </div>
               <div>
-                <p>Proposta:</p>
-                <Rate allowHalf />
-                <p>Proposta:</p>
-                <Rate allowHalf />
-                <p>Proposta:</p>
-                <Rate allowHalf />
+                <span className="rating-p">
+                  <Tooltip title="Quanto a ideia/proposta foi impactante?">
+                    <Icon type="question-circle" />
+                  </Tooltip>
+                  Proposta:
+                </span>
+                <Rate style={{ color: 'black' }} allowHalf />
+                <span className="rating-p">
+                  <Tooltip title="A startup soube demonstrar a sua proposta?">
+                    <Icon type="question-circle" />
+                  </Tooltip>
+                  Apresentação / Pitch:
+                </span>
+                <Rate style={{ color: 'black' }} allowHalf />
+                <span className="rating-p">
+                  <Tooltip title="No estagio atual do produto/serviço, atende bem a proposta?">
+                    <Icon type="question-circle" />
+                  </Tooltip>
+                  Desenvolvimento:
+                </span>
+                <Rate style={{ color: 'black' }} allowHalf />
               </div>
             </div>
           </Modal>
