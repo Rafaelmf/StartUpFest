@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { Card, Input, Checkbox, Divider, Spin } from 'antd';
 import { withApollo } from 'react-apollo';
 import { ALL_SEGMENTS } from '../../dataSource/requests';
@@ -8,7 +8,7 @@ import RatingModal from '../../components/RatingModal';
 
 const { Meta } = Card;
 const { Search } = Input;
-class Home extends PureComponent {
+class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
