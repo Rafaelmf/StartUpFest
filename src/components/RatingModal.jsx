@@ -32,6 +32,7 @@ class RatingModal extends Component {
             ? (data.ratePresentation * data.count + values.ratePresentation) / (data.count + 1)
             : values.ratePresentation,
           segmentName: this.props.selectedSegment.name,
+          imageUrl: this.props.selectedStartup.imageUrl,
         };
         var updates = {};
         updates['/rating/' + this.props.selectedStartup.name.replace(/[^a-zA-Z ]/g, '')] = postData;
