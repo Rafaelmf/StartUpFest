@@ -16,18 +16,21 @@ export default function RatingCard(props) {
           <Meta title={title} />
           <div className="card-content">
             <CardRow
+              position="1º"
               imgUrl={data[0].imageUrl}
               name={data[0].startupName}
               segment={data[0].segmentName}
               rating={data[0][ratingField].toFixed(2)}
             />
             <CardRow
+              position="2º"
               imgUrl={data[1].imageUrl}
               name={data[1].startupName}
               segment={data[1].segmentName}
               rating={data[1][ratingField].toFixed(2)}
             />
             <CardRow
+              position="3º"
               imgUrl={data[2].imageUrl}
               name={data[2].startupName}
               segment={data[2].segmentName}
@@ -42,11 +45,11 @@ export default function RatingCard(props) {
 
 function CardRow(props) {
   const {
-    imgUrl, name, segment, rating,
+    imgUrl, name, segment, rating, position,
   } = props;
   return (
     <React.Fragment>
-      <h1 className="numbers">1º</h1>
+      <h1 className="numbers">{position}</h1>
       <img
         className="row-img"
         alt="exemplo"
@@ -71,6 +74,7 @@ CardRow.defaultProps = {
   name: {},
   segment: {},
   rating: {},
+  position: {},
 };
 
 CardRow.propTypes = {
@@ -78,6 +82,7 @@ CardRow.propTypes = {
   name: PropTypes.string,
   segment: PropTypes.string,
   rating: PropTypes.string,
+  position: PropTypes.string,
 };
 
 RatingCard.defaultProps = {
