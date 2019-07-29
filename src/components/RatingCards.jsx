@@ -9,7 +9,7 @@ const mockedData = {
   name: 'FireGames',
   segment: 'Games',
   imgUrl: 'http://www.sevna.com.br/site/wp-content/uploads/2018/08/MarcasAceleradas_predify.png',
-  rating: 3,
+  rating: 3.4,
 };
 export default function RatingCard(props) {
   const { loading, title } = props;
@@ -59,7 +59,7 @@ function CardRow(props) {
       <div className="description">
         <h4 className="description-name">{name}</h4>
         <p className="description-segment">{segment}</p>
-        <Rate className="description-rating" disabled defaultValue={rating} />
+        <Rate className="description-rating" disabled defaultValue={rating} allowHalf />
         <span>{`${rating}/5`}</span>
       </div>
     </React.Fragment>
