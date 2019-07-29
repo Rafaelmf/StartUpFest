@@ -4,7 +4,7 @@ import { withApollo } from 'react-apollo';
 import { ALL_SEGMENTS } from '../../dataSource/requests';
 import './Startups.css';
 import noLogo from '../../img/no-logo.jpg'; // Tell Webpack this JS file uses this image
-import RatingModal from '../../components/RatingModal';
+import RatingModal from './RatingModal';
 
 const { Meta } = Card;
 const { Search } = Input;

@@ -1,42 +1,42 @@
 import React from 'react';
-import { Card, Rate } from 'antd';
+import { Card, Rate, Spin } from 'antd';
 import PropTypes from 'prop-types';
 import './RatingCards.css';
-import noLogo from '../img/no-logo.jpg';
+import noLogo from '../../img/no-logo.jpg';
 
 const { Meta } = Card;
-const mockedData = {
-  name: 'FireGames',
-  segment: 'Games',
-  imgUrl: 'http://www.sevna.com.br/site/wp-content/uploads/2018/08/MarcasAceleradas_predify.png',
-  rating: 3.4,
-};
 export default function RatingCard(props) {
-  const { loading, title } = props;
+  const { title, data, ratingField } = props;
   return (
-    <Card loading={loading}>
-      <Meta title={title} />
-      <div className="card-content">
-        <CardRow
-          imgUrl={mockedData.imgUrl}
-          name={mockedData.name}
-          segment={mockedData.segment}
-          rating={mockedData.rating}
-        />
-        <CardRow
-          imgUrl={mockedData.imgUrl}
-          name={mockedData.name}
-          segment={mockedData.segment}
-          rating={mockedData.rating}
-        />
-        <CardRow
-          imgUrl={mockedData.imgUrl}
-          name={mockedData.name}
-          segment={mockedData.segment}
-          rating={mockedData.rating}
-        />
-      </div>
-    </Card>
+    <React.Fragment>
+      {data.length === 0 ? (
+        <Spin />
+      ) : (
+        <Card>
+          <Meta title={title} />
+          <div className="card-content">
+            <CardRow
+              imgUrl={data[0].imageUrl}
+              name={data[0].startupName}
+              segment={data[0].segmentName}
+              rating={data[0][ratingField].toFixed(2)}
+            />
+            <CardRow
+              imgUrl={data[1].imageUrl}
+              name={data[1].startupName}
+              segment={data[1].segmentName}
+              rating={data[1][ratingField].toFixed(2)}
+            />
+            <CardRow
+              imgUrl={data[2].imageUrl}
+              name={data[2].startupName}
+              segment={data[2].segmentName}
+              rating={data[2][ratingField].toFixed(2)}
+            />
+          </div>
+        </Card>
+      )}
+    </React.Fragment>
   );
 }
 
@@ -77,15 +77,17 @@ CardRow.propTypes = {
   imgUrl: PropTypes.string,
   name: PropTypes.string,
   segment: PropTypes.string,
-  rating: PropTypes.number,
+  rating: PropTypes.string,
 };
 
 RatingCard.defaultProps = {
-  loading: {},
   title: {},
+  data: {},
+  ratingField: {},
 };
 
 RatingCard.propTypes = {
-  loading: PropTypes.bool,
   title: PropTypes.string,
+  data: PropTypes.shape({}),
+  ratingField: PropTypes.string,
 };

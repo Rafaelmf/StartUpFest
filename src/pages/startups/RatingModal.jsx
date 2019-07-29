@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { Modal, Divider, Rate, Button, Tooltip, Icon, Form } from 'antd';
 import PropTypes from 'prop-types';
-import noLogo from '../img/no-logo.jpg';
+import noLogo from '../../img/no-logo.jpg';
 import './RatingModal.css';
-import Firebase from '../dataSource/fireBase';
-import renderEmpty from 'antd/lib/config-provider/renderEmpty';
+import Firebase from '../../dataSource/fireBase';
 
 class RatingModal extends Component {
   handleSubmit = e => {
@@ -33,6 +32,7 @@ class RatingModal extends Component {
             : values.ratePresentation,
           segmentName: this.props.selectedSegment.name,
           imageUrl: this.props.selectedStartup.imageUrl,
+          startupName: this.props.selectedStartup.name,
         };
         var updates = {};
         updates['/rating/' + this.props.selectedStartup.name.replace(/[^a-zA-Z ]/g, '')] = postData;
@@ -47,7 +47,7 @@ class RatingModal extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { modalVisible, selectedSegment, selectedStartup, onOk, onCancel } = this.props;
+    const { modalVisible, selectedSegment, selectedStartup, onCancel } = this.props;
     return (
       <React.Fragment>
         {modalVisible && (
