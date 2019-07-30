@@ -1,10 +1,23 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Layout as LayoutComponent, Menu } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import './Layout.css';
 
-class Layout extends PureComponent {
+class Layout extends Component {
+  getCurrentKey = () => {
+    const { pathname } = this.props.location;
+    console.log(pathname);
+    switch (pathname) {
+      case '/startups':
+        return ['2'];
+      case '/results':
+        return ['3'];
+      default:
+        return ['1'];
+    }
+  };
+
   render() {
     const { Header, Content, Footer } = LayoutComponent;
     const { children } = this.props;
@@ -12,7 +25,7 @@ class Layout extends PureComponent {
       <LayoutComponent className="layout">
         <Header>
           <div className="logo" />
-          <Menu className="menu" theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
+          <Menu className="menu" theme="dark" mode="horizontal" selectedKeys={this.getCurrentKey()}>
             <Menu.Item key="1">
               <Link to="/">Home</Link>
             </Menu.Item>
@@ -37,4 +50,6 @@ Layout.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
 };
 
-export default Layout;
+const WrappedLayout = withRouter(props => <Layout {...props} />);
+
+export default WrappedLayout;
