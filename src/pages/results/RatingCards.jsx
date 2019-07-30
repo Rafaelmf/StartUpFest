@@ -8,12 +8,16 @@ const { Meta } = Card;
 export default function RatingCard(props) {
   const { title, data, ratingField } = props;
   return (
+    // Used React Fragment to avoid extra unecessary elements on components tree
     <React.Fragment>
+      {/* Added a spin component from Antd while data is still being fetch */}
       {data.length === 0 ? (
         <Spin />
       ) : (
         <Card>
           <Meta title={title} />
+          {/* Card content is using grid to display the rows
+          This also make it easier to write html with no concern about encapsulation */}
           <div className="card-content">
             <CardRow
               position="1º"
@@ -48,12 +52,14 @@ function CardRow(props) {
     imgUrl, name, segment, rating, position,
   } = props;
   return (
+    // Used React Fragment to avoid extra unecessary elements on components tree
     <React.Fragment>
       <h1 className="numbers">{position}</h1>
       <img
         className="row-img"
         alt="exemplo"
         src={imgUrl}
+        // On Error function to handle images with broken url.
         onError={(e) => {
           e.target.onError = null;
           e.target.src = noLogo;

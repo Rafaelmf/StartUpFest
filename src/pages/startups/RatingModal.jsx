@@ -7,10 +7,14 @@ import Firebase from '../../dataSource/fireBase';
 
 class RatingModal extends Component {
   handleSubmit = e => {
+    // Prevents default behaviour from component. This void unwanted scenarios
     e.preventDefault();
+
+    // This props provided by Antd Forms is used to valided if all fields where
+    // correctly filled
     this.props.form.validateFields(async (err, values) => {
       if (!err) {
-        //Getting information from DB
+        //Getting information from DB to avoid duplicate entries on /rating
         const data = await Firebase.database()
           .ref('/rating/' + this.props.selectedStartup.name.replace(/[^a-zA-Z ]/g, ''))
           .once('value')
@@ -18,7 +22,8 @@ class RatingModal extends Component {
             return snapshot.val();
           });
 
-        // Updating database
+        // Updating database with weighted rating for each category, incremented
+        // number of votings (count variable) and some information used on Results page.
         const postData = {
           count: data ? data.count + 1 : 1,
           rateDevelopment: data
@@ -34,7 +39,8 @@ class RatingModal extends Component {
           imageUrl: this.props.selectedStartup.imageUrl,
           startupName: this.props.selectedStartup.name,
         };
-        var updates = {};
+        const updates = {};
+        // This replace fixed an error with startups that had special characters on name
         updates['/rating/' + this.props.selectedStartup.name.replace(/[^a-zA-Z ]/g, '')] = postData;
         Firebase.database()
           .ref()
@@ -49,12 +55,16 @@ class RatingModal extends Component {
     const { getFieldDecorator } = this.props.form;
     const { modalVisible, selectedSegment, selectedStartup, onCancel } = this.props;
     return (
+      // Used React Fragment to avoid extra unecessary elements on components tree
       <React.Fragment>
+        {/* Condition to display modal */}
         {modalVisible && (
+          // Used Form from Antd to handle input for ratings centrilized.
           <Form onSubmit={this.handleSubmit}>
             <Modal
               title={`Segmento: ${selectedSegment.name}`}
               visible={modalVisible}
+              // Custom footer to add handleSubmit on the "Enviar" button
               footer={[
                 <Button key="back" onClick={onCancel}>
                   Cancelar
@@ -72,6 +82,7 @@ class RatingModal extends Component {
                   <img
                     alt="exemplo"
                     className="modal-img"
+                    // On Error function to handle images with broken url.
                     src={selectedStartup.imageUrl}
                     onError={e => {
                       e.target.onError = null;
@@ -81,6 +92,7 @@ class RatingModal extends Component {
                 </div>
                 <div>
                   <span className="rating-p">
+                    {/* I thought it will be nice to give some extra help for users when voting */}
                     <Tooltip title="Quanto a ideia/proposta foi impactante?">
                       <Icon type="question-circle" />
                     </Tooltip>
@@ -123,6 +135,7 @@ class RatingModal extends Component {
   }
 }
 
+// Wraped Modal with Form from Antd to handle input and submit
 const WrappedRatingModal = Form.create()(RatingModal);
 
 export default WrappedRatingModal;

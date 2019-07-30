@@ -1,5 +1,7 @@
 import gql from 'graphql-tag';
 
+// Definition of the query used on GraphQl.
+// Retrieved just necessary data
 export const ALL_SEGMENTS = gql`
   query {
     allSegments {
@@ -10,8 +12,6 @@ export const ALL_SEGMENTS = gql`
         name
         imageUrl
         segment_id
-        teamCount
-        annualReceipt
         description
       }
     }

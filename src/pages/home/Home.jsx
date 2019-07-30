@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 
+// This page can be used to display information about the event.
 class Home extends PureComponent {
   render() {
     return (

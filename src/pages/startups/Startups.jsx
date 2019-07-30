@@ -3,7 +3,7 @@ import { Card, Input, Checkbox, Divider, Spin } from 'antd';
 import { withApollo } from 'react-apollo';
 import { ALL_SEGMENTS } from '../../dataSource/requests';
 import './Startups.css';
-import noLogo from '../../img/no-logo.jpg'; // Tell Webpack this JS file uses this image
+import noLogo from '../../img/no-logo.jpg';
 import RatingModal from './RatingModal';
 
 const { Meta } = Card;
@@ -18,15 +18,18 @@ class Home extends Component {
   }
 
   componentDidMount() {
+    // withApollo injects client props that is used to fecth data
     const { client } = this.props;
+
+    // Query to retrieve information for the page
     client
       .query({
         query: ALL_SEGMENTS,
       })
       .then(result => {
-        //Todos os segmentos carregados na página
+        // This holds all segments loaded from graphQl
         const allSegments = result.data.allSegments;
-        //Lista com os nomes dos segmentos para gerar os checkbox
+        // List with segment names to create Check Box naming list
         const segmentNames = allSegments.map(segment => segment.name);
         this.setState({
           isLoading: false,
@@ -39,13 +42,13 @@ class Home extends Component {
 
   onChangeCheckbox = checkedValues => {
     const { allSegments } = this.state;
-    //Se nenhum checkbox está ativo, mostrar todos
+    // If none of the checkbox is active, then display all
     if (checkedValues.length === 0) {
       this.setState({
         displaySegments: allSegments,
       });
     } else {
-      // Filtrar os segmentos cujo nome está na lista de checkbox ativos
+      // Filter segments that its corresponding checkbox is active
       const newDisplaySegments = allSegments.filter(segment =>
         checkedValues.includes(segment.name),
       );
@@ -57,15 +60,14 @@ class Home extends Component {
 
   onSearch = value => {
     const { allSegments, isLoading } = this.state;
-    //Evitar uma busca antes de ter os dados carregados.
+    // Avoid search while date is not ready
     if (!isLoading) {
-      //Iterando em todos segmentos
       const newDisplaySegments = allSegments.map(segments => {
-        //Filtrando as Startups que tem o nome contendo a string inserida no campo de busca
+        //Filter startups that contains the text inserted on Search bar
         const filteredStartups = segments.Startups.filter(startup => {
           return startup.name.toLowerCase().search(value.toLowerCase()) !== -1;
         });
-        //Retornando o objeto segments com o campo Startups alterado
+        // Return filtered segments object
         return {
           ...segments,
           Startups: filteredStartups,
@@ -75,12 +77,9 @@ class Home extends Component {
     }
   };
 
+  // This function is passed by props to the Modal in order to close it
   handleCancelModal = () => {
     this.setState({ modalVisible: false });
-  };
-
-  handleOkModal = () => {
-    //Submit rating data here
   };
 
   render() {
@@ -94,6 +93,10 @@ class Home extends Component {
     } = this.state;
     return (
       <div className="startup-container">
+        {/* Here I added some search and filter tools. The search bar is by startup
+        name and the Checkbox group filter the startups by their segment. Note here that
+        Both filters are still not working together, and each can overide the other.
+        */}
         <div className="search-header">
           <Search
             placeholder="Pesquise o nome da Startup"
@@ -111,9 +114,13 @@ class Home extends Component {
             <Spin />
           ) : (
             <div className="card-container">
+              {/* Iterate on array with already filtered objects with information for
+              generating Cards */}
               {displaySegments.map(segment =>
                 segment.Startups.map(startup => (
                   <Card
+                    // On click needs to fill state with data from startup selected
+                    // in order to display modal for rating
                     onClick={() =>
                       this.setState({
                         selectedSegment: segment,
@@ -124,10 +131,10 @@ class Home extends Component {
                     key={segment.id}
                     className="card"
                     hoverable
-                    style={{ width: 300 }}
                     cover={
                       <img
                         className="card-image"
+                        // On Error function to handle images with broken url.
                         onError={e => {
                           e.target.onError = null;
                           e.target.src = noLogo;
@@ -144,11 +151,12 @@ class Home extends Component {
             </div>
           )}
         </div>
+        {/* This modal will be displayed only when some Card is clicked and proper
+        states are filled with data used here */}
         <RatingModal
           modalVisible={modalVisible}
           selectedSegment={selectedSegment}
           selectedStartup={selectedStartup}
-          onOk={this.handleOkModal}
           onCancel={this.handleCancelModal}
         />
       </div>

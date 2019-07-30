@@ -1,5 +1,7 @@
 import firebase from 'firebase';
 
+// Configuration for fireBase that I created with my e-mail
+// Here I just tried to follow documentation
 const config = {
   apiKey: 'AIzaSyAqTu9eBJgWa7VqC0xzukSwoTmhO3RTrDE',
   authDomain: 'startupfest-d20dd.firebaseapp.com',
@@ -10,4 +12,6 @@ const config = {
   appId: '1:331068931484:web:c24805cbe5a98fce',
 };
 const Firebase = firebase.initializeApp(config);
+
+// Exporting the Firebase to be used by other clases
 export default Firebase;

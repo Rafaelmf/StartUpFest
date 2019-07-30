@@ -15,11 +15,14 @@ class Home extends Component {
   }
 
   async componentWillMount() {
+    // This retrieve data from "table" /rating that is populated by RatingModal
+    // component
     const data = await Firebase.database()
       .ref('/rating')
       .once('value')
       .then(snapshot => snapshot.val());
 
+    // All itens are ordered based on each criteria and resulting 3 diferent arrays
     this.setState({
       sortedArrayDevelopment: Object.values(data).sort(
         (a, b) => b.rateDevelopment - a.rateDevelopment,

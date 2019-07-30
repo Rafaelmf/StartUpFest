@@ -7,6 +7,7 @@ import Startups from '../pages/startups/Startups';
 import Results from '../pages/results/Results';
 import NotFound from '../pages/notFound/NotFound';
 
+// This holds which page should be loaded inside Layout Content bases on the URL
 const Routes = () => (
   <Router>
     <Switch>
